@@ -1,0 +1,19 @@
+.ng-cloak{
+	display:none;
+}
+
+.container {
+    padding-top: 35px;
+}
+/*html, body {
+	height: 70%;
+	margin: 0;
+	padding: 0;
+}*/
+
+/* need to add this selector, and give it a height in px (not %) in order to see the map */
+.angular-google-map-container {
+	height: 400px;
+	width: 40%;
+	margin: auto;
+}

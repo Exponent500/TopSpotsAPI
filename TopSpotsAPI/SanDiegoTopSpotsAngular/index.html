@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html ng-app="sanDiegoTopSpots" lang="en" class="ng-cloak"> 
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE-edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>San Diego Top Spots Angular</title>
+        <!-- bower:css -->
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="bower_components/animate.css/animate.css" />
+        <link rel="stylesheet" href="bower_components/toastr/toastr.css" />
+        <link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.css" />
+        <!-- endbower -->
+
+        <!-- inject:css -->
+        <link rel="stylesheet" href="/app/styles/main.css">
+        <!-- endinject -->  
+    </head>
+
+    <body ng-controller="sanDiegoTopSpots as vm"> 
+        <div class="container">
+            
+            <!-- Table listing San Diego's Top Spots -->
+            <table class="table table-striped">
+                <caption class="h2">San Diego Top Spots Angular</caption>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Location</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="data in vm.topspots"> 
+                        <td>
+                            {{data.name}} 
+                        </td>
+                        <td>
+                            {{data.description}} 
+                        </td>
+                        <td>
+                            <a class="btn btn-primary" href="https://www.google.com/maps?q={{data.location[0]}}, {{data.location[1]}}">Open In Google Maps</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Form to add new rows to topspots table -->
+            <h1>Add a new Hotspot</h1>
+            <form ng-submit="vm.addRow()">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input class="form-control" type="text" ng-model="vm.name" name="name">
+                </div>
+                <div class="form group">
+                    <label for="description">Description</label>
+                    <input class="form-control" type="text" ng-model="vm.description" name="description">
+                </div>
+                <div class="form-group">
+                    <label for="latitude">Latitude</label>
+                    <input class="form-control" type="text" ng-model="vm.latitude" name="latitude">
+                </div>
+                <div class="form-group">
+                    <label for="longitude">Longitude</label>
+                    <input class="form-control" type="text" ng-model="vm.longitude" name="longitude">
+                </div>                    
+                <div class="form-group"> 
+                     <input type="submit" class="btn btn-primary" value="Submit">
+                </div>
+            </form>
+
+        </div>
+        
+        <!-- insert Google map with markers -->
+        <ui-gmap-google-map center="map.center" zoom="map.zoom">
+            <ui-gmap-markers models="markers" coords="'coords'" idkey="'name'"></ui-gmap-markers>
+        </ui-gmap-google-map>  
+
+        <!-- bower:js -->
+        <script src="bower_components/jquery/dist/jquery.js"></script>
+        <script src="bower_components/toastr/toastr.js"></script>
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
+        <script src="bower_components/angular-simple-logger/dist/angular-simple-logger.js"></script>
+        <script src="bower_components/lodash/lodash.js"></script>
+        <script src="bower_components/markerclustererplus/src/markerclusterer.js"></script>
+        <script src="bower_components/google-maps-utility-library-v3-markerwithlabel/dist/markerwithlabel.js"></script>
+        <script src="bower_components/google-maps-utility-library-v3-infobox/dist/infobox.js"></script>
+        <script src="bower_components/google-maps-utility-library-v3-keydragzoom/dist/keydragzoom.js"></script>
+        <script src="bower_components/js-rich-marker/src/richmarker.js"></script>
+        <script src="bower_components/angular-google-maps/dist/angular-google-maps.js"></script>
+        <!-- endbower -->
+
+        <!-- inject:js -->
+        <script src="/app/app.module.js"></script>
+        <script src="/app/topspots.controller.js"></script>
+        <script src="/app/topspots.factory.js"></script>
+        <!-- endinject -->
+        
+        <!-- google maps Javascript API -->
+        <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4KD2Euxaq1AGeF_JFKcSuGVSMbvv3v3U&sensor=false" async defer></script> -->
+    </body>
+</html>
